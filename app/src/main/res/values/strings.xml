@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">flowerShopApp</string>
+    <string name="flower">flower</string>
+    <string name="till">Till</string>
+    <string name="stock_management">Stock Management</string>
 </resources>
