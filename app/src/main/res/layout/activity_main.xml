@@ -4,30 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scaleX="2"
+    android:scaleY="1"
     tools:context=".MainActivity">
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/tillButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="216dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#27932C"
+        android:onClick="openTill"
         android:text="@string/till"
+        app:iconTint="#4CAF50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="openTill"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/stockManagementButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="openStockManagement"
         android:text="@string/stock_management"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.37"
-        android:onClick="openStockManagement"/>
+        app:layout_constraintTop_toBottomOf="@+id/tillButton"
+        app:layout_constraintVertical_bias="0.37" />
 </androidx.constraintlayout.widget.ConstraintLayout>
