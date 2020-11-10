@@ -25,18 +25,18 @@ public class Item implements View.OnClickListener {
         this.quantity = quantity;
         mContext = context;
         activity = (Activity) mContext;
-        activity.setContentView(R.layout.till);
-        plusButton = (Button) activity.findViewById(R.id.plusButtonView);
-        plusButton.setOnClickListener(this);
-        minusButton = (Button) activity.findViewById(R.id.minusButton);
-        minusButton.setOnClickListener(this);
-        nameTextView = (TextView) activity.findViewById(R.id.nameTextView);
-        priceTextView = (TextView) activity.findViewById(R.id.priceTextView);
-        quantityTextView = (TextView) activity.findViewById(R.id.quantityTextView);
+//        activity.setContentView(R.layout.till);
+//        plusButton = (Button) activity.findViewById(R.id.plusButtonView);
+//        plusButton.setOnClickListener(this);
+ //       minusButton = (Button) activity.findViewById(R.id.minusButton);
+  //      minusButton.setOnClickListener(this);
+   //     nameTextView = (TextView) activity.findViewById(R.id.nameTextView);
+     //   priceTextView = (TextView) activity.findViewById(R.id.priceTextView);
+       // quantityTextView = (TextView) activity.findViewById(R.id.quantityTextView);
 
-        setNameTextView(name);
-        setPriceTextView(price);
-        setQuantityTextView(quantity);
+        //setNameTextView(name);
+        //setPriceTextView(price);
+        //setQuantityTextView(quantity);
 
     }
 
@@ -76,16 +76,16 @@ public class Item implements View.OnClickListener {
     }
 
     private void setNameTextView (String name) {
-        nameTextView.setText(name);
+//        nameTextView.setText(name);
     }
 
     private void setPriceTextView (double price) {
         String barca = String.valueOf(price);
-        priceTextView.setText(barca);
+  //      priceTextView.setText(barca);
     }
     private void setQuantityTextView (int quantity) {
         String barca = String.valueOf(quantity);
-        quantityTextView.setText(barca);
+    //    quantityTextView.setText(barca);
     }
     private int increaseQuantity() {
         if (quantity<100) {
@@ -114,7 +114,7 @@ public class Item implements View.OnClickListener {
             default:
                 break;
         }
-        setQuantityTextView(quantity);
+      //  setQuantityTextView(quantity);
 
     }
 
