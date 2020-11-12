@@ -3,4 +3,29 @@
     <string name="flower">flower</string>
     <string name="till">Till</string>
     <string name="stock_management">Stock Management</string>
+    <string name="name">Name</string>
+    <string name="type">Type</string>
+    <string name="toastPartOne">There are no more</string>
+    <string name="toastPartTwo"> available. Your current stock level is </string>
+    <string name="product_name">Product name...</string>
+    <string name="dot">.</string>
+    <string name="msgNegQty">You can\'t sell a negative quantity of flowers!</string>
+    <string name="recipt">Receipt FlowerShop</string>
+    <string name="price">Price</string>
+    <string name="in">In £...</string>
+    <string name="quantity">Quantity...</string>
+    <string name="type_quantity">Type Quantity</string>
+    <string name="add">Add</string>
+    <string name="flowerAlt">Flower</string>
+    <string name="floweraAlt">Flower</string>
+    <string name="_0_00">£0.00</string>
+    <string name="plus">+</string>
+    <string name="_0">0</string>
+    <string name="minus">-</string>
+    <string name="add_item">Add Item</string>
+    <string name="qty">QTY</string>
+    <string name="total">Total</string>
+    <string name="priceSign">£</string>
+    <string name="email">Email</string>
+
 </resources>

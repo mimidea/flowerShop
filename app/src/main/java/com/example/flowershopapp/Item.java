@@ -2,8 +2,10 @@ package com.example.flowershopapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Item {
+public class Item  implements Parcelable {
     private String name;
     private double price;
     private int quantity;
@@ -11,12 +13,10 @@ public class Item {
     private Activity activity;
 
 
-    public Item (String name, double price, int quantity, Context context){
+    public Item (String name, double price, int quantity){
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        mContext = context;
-        activity = (Activity) mContext;
     }
 
     public String getName() {
@@ -41,6 +41,18 @@ public class Item {
 
     public void setQuantity(int quantity) {
         this.quantity=quantity;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeDouble(price);
+        dest.writeInt(quantity);
     }
 }
 

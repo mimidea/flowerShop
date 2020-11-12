@@ -1,10 +1,10 @@
 package com.example.flowershopapp;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class MyStockAdapter extends RecyclerView.Adapter<MyStockAdapter.MyViewHolder> {
 
     private ArrayList<Item> mDataset;
     public TextView finalPriceTextView;
@@ -31,12 +31,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-    public MyAdapter(ArrayList<Item> mDataset) {
+    public MyStockAdapter(ArrayList<Item> mDataset) {
        this.mDataset= mDataset;
     }
 
-    public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LinearLayoutCompat v = (LinearLayoutCompat) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_stock, parent, false);
+    public MyStockAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LinearLayoutCompat v = (LinearLayoutCompat) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_stock_management, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
                 return vh;
     }
@@ -49,7 +49,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         priceTextView.setText(priceString);
         TextView quantityTextView = holder.linearLayoutCompat.findViewById(R.id.quantityTextView);
         int quantityInt = mDataset.get(position).getQuantity();
-        quantityTextView.setText(String.valueOf(0));
+        quantityTextView.setText(String.valueOf(quantityInt));
+        ImageView binView = holder.linearLayoutCompat.findViewById(R.id.deleteView);
         Button plusButton = holder.linearLayoutCompat.findViewById(R.id.plusButtonView);
         Button minusButton = holder.linearLayoutCompat.findViewById(R.id.minusButtonView);
         quantityValue.add(Integer.parseInt(quantityTextView.getText().toString()));
@@ -61,33 +62,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 case R.id.plusButtonView:
                         increaseQuantity(quantityTextView, position, v, quantityInt);
                     break;
+                case R.id.deleteView:
+                         deleteItem(position);
+                         break;
                 default:
                     break;
             }
-
-            finalPriceTextView = holder.linearLayoutCompat.getRootView().findViewById(R.id.finalPriceTextView);
-            finalPriceTextView.setText(String.valueOf(calculateTotal(quantityValue)));
         };
 
         plusButton.setOnClickListener(clickListener);
         minusButton.setOnClickListener(clickListener);
     }
 
+    private void deleteItem(int position) {
+    }
+
     private void increaseQuantity(TextView quantityTextView, int position, View view, int quantity) {
         int flowersValue = Integer.parseInt(quantityTextView.getText().toString());
         flowersValue++;
-        Item tempItem = mDataset.get(position);
-        if (flowersValue<=quantity){
-            String flowersValueString = String.valueOf(flowersValue);
-            quantityTextView.setText(flowersValueString);
-            tempItem.setQuantity(flowersValue);
-            mDataset.set(position, tempItem);
+            mDataset.get(position).setQuantity(flowersValue);
             quantityValue.set(position, Integer.parseInt(quantityTextView.getText().toString()));
-        } else {
-            Toast.makeText(view.getContext(), String.valueOf(R.string.toastPartOne) + tempItem.getName() +
-                   String.valueOf(R.string.toastPartTwo)+ --flowersValue + String.valueOf(R.string.dot),Toast.LENGTH_SHORT).show();
         }
-    }
+
+
 
     private void decreaseQuantity(TextView quantityTextView, int position, View view) {
         int flowersValue = Integer.parseInt(quantityTextView.getText().toString());
@@ -103,18 +100,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             Toast.makeText(view.getContext(), String.valueOf(R.string.msgNegQty),Toast.LENGTH_SHORT).show();
         }
     }
-
-    private double calculateTotal (ArrayList quantityValue) {
-        double totalToReturn = 0;
-        for(int x=0; x<mDataset.size(); x++) {
-            int quantityTotal =Integer.parseInt(quantityValue.get(x).toString());
-            double priceTotal = mDataset.get(x).getPrice();
-            double finalTotal = quantityTotal * priceTotal;
-            totalToReturn += finalTotal;
-        }
-        return totalToReturn;
-    }
-
 
 
     public int getItemCount(){

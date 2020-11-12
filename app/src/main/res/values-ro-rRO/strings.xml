@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">flowerShopApp</string>
+    <string name="flower">Floare</string>
+    <string name="till">Casā de marcat</string>
+    <string name="stock_management">Gestionare Stoc</string>
+    <string name="name">Nume</string>
+    <string name="type">Scrie</string>
+    <string name="toastPartOne">Nu mai este</string>
+    <string name="toastPartTwo"> disponibil. Stocul tau este </string>
+    <string name="product_name">Numele produsului</string>
+    <string name="dot">.</string>
+    <string name="msgNegQty">Nu poti vinde o cantitate negativa</string>
+    <string name="recipt">Bon Fiscal FlowerShop</string>
+    <string name="price">Pret</string>
+    <string name="in">In £...</string>
+    <string name="quantity">Cantitate...</string>
+    <string name="type_quantity">Introdu cantitatea</string>
+    <string name="add">Adauga</string>
+    <string name="flowerAlt">Flori</string>
+    <string name="floweraAlt">Floare</string>
+    <string name="_0_00">£0.00</string>
+    <string name="plus">+</string>
+    <string name="_0">0</string>
+    <string name="minus">-</string>
+    <string name="add_item">Adauga produs</string>
+    <string name="qty">Qty</string>
+    <string name="total">Total</string>
+    <string name="priceSign">£</string>
+    <string name="email">Email</string>
+
+</resources>

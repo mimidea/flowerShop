@@ -25,13 +25,9 @@ public class Till {
     public Button emailButton;
 
 
-    public ArrayList<Item> tillItems = new ArrayList<>();
+    public ArrayList<Item> tillItems = StockManagement.stockItems;
 
     public Till(Context context) {
-        Item item = new Item("Rose", 10.00, 20, mContext);
-        Item item2 = new Item("Muscata", 5.00, 25, mContext);
-        tillItems.add(item);
-        tillItems.add(item2);
         mContext = context;
         activity = (Activity) mContext;
         activity.setContentView(R.layout.till);
@@ -44,7 +40,7 @@ public class Till {
         emailButton = activity.findViewById(R.id.emailButton);
 
         View.OnClickListener clickListener = v -> {
-            String subject = "Receipt FlowerShop";
+            String subject = String.valueOf(R.string.recipt);
             String message = "";
             switch (v.getId()) {
                 case R.id.emailButton:
