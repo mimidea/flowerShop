@@ -15,6 +15,7 @@ public class AddItemStock {
     public Context mContext;
     public Activity activity;
     public Button addStock;
+    public Button backButton;
 
     public AddItemStock(Context context) {
 
@@ -22,11 +23,11 @@ public class AddItemStock {
         activity = (Activity) mContext;
         activity.setContentView(R.layout.add_stock);
         addStock = activity.findViewById(R.id.addStockBotton);
+        backButton = activity.findViewById(R.id.addStockBackButton);
 
         View.OnClickListener clickListener = v -> {
             switch (v.getId()) {
                 case R.id.addStockBotton:
-                    System.out.println("hello");
                     EditText nameEditText = activity.findViewById(R.id.editProductType);
                     String tempName = nameEditText.getText().toString();
                     EditText priceEditText = activity.findViewById(R.id.textEditPrice);
@@ -35,19 +36,21 @@ public class AddItemStock {
                     String tempQuantity = quantityEditText.getText().toString();
                     if (tempName.equals("")||tempPrice.equals("")||tempQuantity.equals("")){
                         StockManagement stockManagement = new StockManagement(mContext);
-                        System.out.println("finish");
                         break;
                     } else {
                         Item tempItem = new Item(tempName, Double.parseDouble(tempPrice), Integer.parseInt(tempQuantity));
                         stockItems.add(tempItem);
                     }
-                    StockManagement stockManagement = new StockManagement(mContext);
-                    System.out.println("finish");
-
+                    new StockManagement(mContext);
+                    break;
+                case R.id.addStockBackButton:
+                    new StockManagement(mContext);
+                    break;
                 default:
                     break;
             }
         };
         addStock.setOnClickListener(clickListener);
+        backButton.setOnClickListener(clickListener);
     }
 }

@@ -78,14 +78,29 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
     <Button
-        android:id="@+id/addNew"
-        android:layout_width="160dp"
+        android:id="@+id/stockMangementBackButton"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/add_item"
+        android:text="@string/back"
         android:paddingRight="32dp"
         android:layout_gravity="end"/>
+        <Button
+            android:id="@+id/addNew"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/add_item"
+            android:paddingRight="32dp"
+            android:layout_gravity="end"/>
+        />
     />
+</androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>

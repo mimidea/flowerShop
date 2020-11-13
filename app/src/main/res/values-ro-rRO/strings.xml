@@ -27,5 +27,6 @@
     <string name="total">Total</string>
     <string name="priceSign">£</string>
     <string name="email">Email</string>
+    <string name="back">Inapoi</string>
 
 </resources>

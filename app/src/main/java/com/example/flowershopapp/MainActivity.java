@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -29,10 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            System.out.println("hi2");
         SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String tempString = app_preferences.getString("stock", "1");
-            restoreArrayList(tempString);
+        restoreArrayList(tempString);
 
         setContentView(R.layout.activity_main);
 
@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        System.out.println("bye");
         super.onSaveInstanceState(savedInstanceState);
         String saveString = "";
         for (int i = 0; i < StockManagement.stockItems.size(); i++) {
@@ -60,15 +59,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = app_preferences.edit();
         editor.putString("stock", saveString);
-        editor.commit();
-        System.out.println(saveString);
+        editor.apply();
     }
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
-        System.out.println("hi");
-
-
+        SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String tempString = app_preferences.getString("stock", "1");
+        restoreArrayList(tempString);
     }
 
     //A method that opens the till
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void restoreArrayList (String tempString){
         if (tempString != null) {
-            if (StockManagement.stockItems.size() == 0) {
+            if (StockManagement.stockItems.size() != 0) {
                 List<String> splitValues = Arrays.asList(tempString.split(","));
                 for (int i = 0; i < splitValues.size(); i += 3) {
                     String tempName = splitValues.get(i);
@@ -109,5 +107,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
+    }
+
+    public void returnToStart(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

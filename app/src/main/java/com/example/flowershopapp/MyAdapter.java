@@ -1,6 +1,10 @@
 package com.example.flowershopapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +15,16 @@ import android.widget.Toast;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private ArrayList<Item> mDataset;
     public TextView finalPriceTextView;
-    public ArrayList<Integer> quantityValue= new ArrayList<>();
+    public static ArrayList<Integer> quantityValue = new ArrayList<>();
+    public String quantityValueString = "";
+
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -53,20 +60,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         Button plusButton = holder.linearLayoutCompat.findViewById(R.id.plusButtonView);
         Button minusButton = holder.linearLayoutCompat.findViewById(R.id.minusButtonView);
         quantityValue.add(Integer.parseInt(quantityTextView.getText().toString()));
+        System.out.println(quantityValue);
         View.OnClickListener clickListener = v -> {
             switch (v.getId()) {
                 case R.id.minusButtonView:
                         decreaseQuantity(quantityTextView, position, v);
+                    finalPriceTextView = holder.linearLayoutCompat.getRootView().findViewById(R.id.finalPriceTextView);
+                    finalPriceTextView.setText(String.valueOf(calculateTotal(quantityValue)));
                         break;
                 case R.id.plusButtonView:
                         increaseQuantity(quantityTextView, position, v, quantityInt);
+                    finalPriceTextView = holder.linearLayoutCompat.getRootView().findViewById(R.id.finalPriceTextView);
+                    finalPriceTextView.setText(String.valueOf(calculateTotal(quantityValue)));
                     break;
                 default:
                     break;
             }
 
-            finalPriceTextView = holder.linearLayoutCompat.getRootView().findViewById(R.id.finalPriceTextView);
-            finalPriceTextView.setText(String.valueOf(calculateTotal(quantityValue)));
+
         };
 
         plusButton.setOnClickListener(clickListener);
@@ -83,9 +94,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             tempItem.setQuantity(flowersValue);
             mDataset.set(position, tempItem);
             quantityValue.set(position, Integer.parseInt(quantityTextView.getText().toString()));
+            quantityValueString = "";
+            for (int i = 0; i<quantityValue.size(); i++){
+                if (i!=0){
+                    quantityValueString+=",";
+                }
+                quantityValueString+= quantityValue.get(i).toString();
+            }
+            SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(Till.mContext);
+            SharedPreferences.Editor editor = app_preferences.edit();
+            editor.putString("stock", quantityValueString);
+            editor.apply();
         } else {
-            Toast.makeText(view.getContext(), String.valueOf(R.string.toastPartOne) + tempItem.getName() +
-                   String.valueOf(R.string.toastPartTwo)+ --flowersValue + String.valueOf(R.string.dot),Toast.LENGTH_SHORT).show();
+            String message = Till.mContext.getResources().getString(R.string.toastPartOne) + tempItem.getName() +
+                    Till.mContext.getResources().getString(R.string.toastPartTwo)+ --flowersValue + Till.mContext.getResources().getString(R.string.dot);
+            Toast.makeText(view.getContext(), message,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -99,21 +122,36 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             tempItem.setQuantity(flowersValue);
             mDataset.set(position, tempItem);
             quantityValue.set(position, Integer.parseInt(quantityTextView.getText().toString()));
+            quantityValueString = "";
+            for (int i = 0; i<quantityValue.size(); i++){
+                if (i!=0){
+                    quantityValueString+=",";
+                }
+                quantityValueString+= quantityValue.get(i).toString();
+            }
+            SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(Till.mContext);
+            SharedPreferences.Editor editor = app_preferences.edit();
+            editor.putString("stock", quantityValueString);
+            editor.apply();
         } else {
-            Toast.makeText(view.getContext(), String.valueOf(R.string.msgNegQty),Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), Till.mContext.getResources().getString(R.string.msgNegQty),Toast.LENGTH_SHORT).show();
         }
     }
 
     private double calculateTotal (ArrayList quantityValue) {
         double totalToReturn = 0;
         for(int x=0; x<mDataset.size(); x++) {
+            System.out.println(quantityValue);
             int quantityTotal =Integer.parseInt(quantityValue.get(x).toString());
             double priceTotal = mDataset.get(x).getPrice();
             double finalTotal = quantityTotal * priceTotal;
             totalToReturn += finalTotal;
         }
+
         return totalToReturn;
     }
+
+
 
 
 

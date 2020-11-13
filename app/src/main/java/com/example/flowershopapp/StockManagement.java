@@ -14,13 +14,13 @@ import java.util.ArrayList;
 
 public class StockManagement {
         private RecyclerView recyclerView;
-        private RecyclerView.Adapter mAdapter;
-        private RecyclerView.LayoutManager layoutManager;
+        private static RecyclerView.Adapter mAdapter;
+        private static RecyclerView.LayoutManager layoutManager;
 
         public Context mContext;
         public Activity activity;
         public Button addButton;
-
+        public Button backButton;
 
         public static ArrayList<Item> stockItems = new ArrayList<>();
 
@@ -35,16 +35,27 @@ public class StockManagement {
                 mAdapter = new MyStockAdapter(stockItems);
                 recyclerView.setAdapter(mAdapter);
                 addButton = activity.findViewById(R.id.addNew);
+                backButton = activity.findViewById(R.id.stockMangementBackButton);
 
                 View.OnClickListener clickListener = v -> {
                         switch (v.getId()) {
                                 case R.id.addNew:
                                         AddItemStock addItemStock = new AddItemStock(mContext);
                                         break;
+                                case R.id.stockMangementBackButton:
+                                        mContext=activity.getApplicationContext();
+                                        new Till(context);
+                                        break;
                                 default:
                                         break;
                         }
                 };
                 addButton.setOnClickListener(clickListener);
+                backButton.setOnClickListener(clickListener);
+        }
+
+        public static void updateAdapter(int position){
+                mAdapter.notifyItemRemoved(position);
+                mAdapter.notifyItemRangeChanged(position, stockItems.size());
         }
 }

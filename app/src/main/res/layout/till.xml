@@ -120,13 +120,29 @@
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/tillBackButton"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/back"
+        android:paddingRight="32dp"
+        android:layout_gravity="start"/>
     <Button
         android:id="@+id/emailButton"
-        android:layout_width="160dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/email"
         android:paddingRight="32dp"
         android:layout_gravity="end"/>
     />
+</androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>

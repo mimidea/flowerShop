@@ -5,7 +5,7 @@
     <string name="stock_management">Stock Management</string>
     <string name="name">Name</string>
     <string name="type">Type</string>
-    <string name="toastPartOne">There are no more</string>
+    <string name="toastPartOne">There are no more </string>
     <string name="toastPartTwo"> available. Your current stock level is </string>
     <string name="product_name">Product name...</string>
     <string name="dot">.</string>
@@ -27,5 +27,6 @@
     <string name="total">Total</string>
     <string name="priceSign">£</string>
     <string name="email">Email</string>
+    <string name="back">Back</string>
 
 </resources>

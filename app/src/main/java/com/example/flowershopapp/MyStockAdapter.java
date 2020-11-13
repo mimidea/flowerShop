@@ -21,9 +21,7 @@ public class MyStockAdapter extends RecyclerView.Adapter<MyStockAdapter.MyViewHo
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        private ArrayList<Item> mDataset = new ArrayList<Item>();
         public LinearLayoutCompat linearLayoutCompat;
-
 
         public MyViewHolder(LinearLayoutCompat v) {
             super(v);
@@ -72,9 +70,12 @@ public class MyStockAdapter extends RecyclerView.Adapter<MyStockAdapter.MyViewHo
 
         plusButton.setOnClickListener(clickListener);
         minusButton.setOnClickListener(clickListener);
+        binView.setOnClickListener(clickListener);
     }
 
     private void deleteItem(int position) {
+        StockManagement.stockItems.remove(position);
+        StockManagement.updateAdapter(position);
     }
 
     private void increaseQuantity(TextView quantityTextView, int position, View view, int quantity) {
